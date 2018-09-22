@@ -25,7 +25,7 @@ class Midi {
 
 		return midi
 	}
-	
+
 	constructor(){
 
 		this.header = {
@@ -101,9 +101,12 @@ class Midi {
 					if (track.channelNumber === -1) {
 						track.channelNumber = event.channel
 					}
-				} else if (event.subtype === 'noteOff'){
-					track.noteOff(event.noteNumber, absoluteTime)
-				} else if (event.subtype === 'controller' && event.controllerType){
+				} else if (event.subtype === 'noteOff') {
+          track.noteOff(event.noteNumber, absoluteTime)
+        } else if (event.subtype === 'setTempo') {
+          event.bpm = 600000 / event.microsecondsPerBeat * 100;
+				  track.tempos.push(event);
+				} else if (event.subtype === 'controller' && event.controllerType) {
 					track.cc(event.controllerType, absoluteTime, event.value / 127)
 				} else if (event.type === 'meta' && event.subtype === 'instrumentName'){
 					track.instrument = event.text

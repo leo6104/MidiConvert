@@ -15,6 +15,7 @@ export interface Track {
 	instrumentNumber: number,
 	readonly instrumentFamily: string,
 	notes: Array<Note>,
+  tempos: { bpm: number, deltaTime: number }[],
 	readonly startTime: number,
 	readonly duration: number,
 	readonly length: number,

@@ -15,7 +15,7 @@ class Track {
 		var track = new Track(json.name, json.instrumentNumber, json.channelNumber )
 
 		track.id = json.id
-		
+
 		if (json.notes) {
 			json.notes.forEach((note) => {
 				var newNote = Note.fromJSON(note)
@@ -29,7 +29,7 @@ class Track {
 
 		return track
 	}
-	
+
 	constructor(name, instrumentNumber=-1, channel=-1){
 
 		/**
@@ -44,11 +44,17 @@ class Track {
 		 */
 		this.channelNumber = channel
 
-		/**
-		 * The note events
-		 * @type {Array}
-		 */
-		this.notes = []
+    /**
+     * The note events
+     * @type {Array}
+     */
+    this.notes = []
+
+    /**
+     * The tempo change events
+     * @type {Array}
+     */
+    this.tempos = []
 
 		/**
 		 * The control changes
