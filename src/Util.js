@@ -3,8 +3,8 @@ export function cleanName(str){
 	return str.replace(/\u0000/g, '')
 }
 
-export function ticksToSeconds(ticks, header){
-	return (60 / header.bpm) * (ticks / header.PPQ);
+export function ticksToSeconds(ticks, header, currentBPM){
+	return (60 / (currentBPM || header.bpm)) * (ticks / header.PPQ);
 }
 
 export function isNumber(val){
