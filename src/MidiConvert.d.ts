@@ -1,5 +1,8 @@
 export interface Note {
-	time: number,
+	time?: number,
+  beat?: number,
+  durationSeconds?: number,
+  seconds?: number,
 	name: string,
 	midi: number,
 	velocity: number,
