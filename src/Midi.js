@@ -92,8 +92,16 @@ class Midi {
 
 			let absoluteDeltaSeconds = 0;
       let bpm = this.header.bpm;
+      let prevDeltaTimeOfTimeSignature = 0;
       trackData.forEach((event) => {
+        if (event.subtype == 'timeSignature') {
+          prevDeltaTimeOfTimeSignature = event.deltaTime;
+        }
         if (event.subtype === 'setTempo') {
+          if (event.deltaTime < 1 && prevDeltaTimeOfTimeSignature > 0) {
+            event.deltaTime = prevDeltaTimeOfTimeSignature;
+          }
+
           absoluteDeltaSeconds += Util.ticksToSeconds(event.deltaTime, this.header, bpm);
           bpm = 600000 / event.microsecondsPerBeat * 100;
 
@@ -103,6 +111,7 @@ class Midi {
             deltaTime: absoluteDeltaSeconds
           });
         }
+
       });
 
       let absoluteTime = 0;
