@@ -96,6 +96,10 @@ class Midi {
       trackData.forEach((event) => {
         if (event.subtype == 'timeSignature') {
           prevDeltaTimeOfTimeSignature = event.deltaTime;
+
+          absoluteDeltaSeconds += Util.ticksToSeconds(event.deltaTime, this.header, bpm);
+
+          track.timeSignatures.push(event);
         }
         if (event.subtype === 'setTempo') {
           if (event.deltaTime < 1 && prevDeltaTimeOfTimeSignature > 0) {
