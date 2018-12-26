@@ -67,6 +67,8 @@ class Track {
 		 * @type {Number}
 		 */
 		this.instrumentNumber = instrumentNumber
+
+		this.timeSignatures = [];
 	}
 
 	note(midi, time, duration=0, velocity=1){
